@@ -61,15 +61,33 @@ var answer6 = 4;
     };
 //add correct answer after guesses exhausted + show answer
 
+function arrayCountries(countryToFind) {
 var questionSeven = prompt('What countries do you think my favorite foods are from? You have 6 guesses.');
-var array = ['USA', 'Japan', 'China', 'Italy', 'France', 'Korea', 'Greece', 'Thailand'];
-if (var i = 0; i < 6; i++) {
-    alert('Correct!')
-    } else (var i > 5) {
-    alert('The correct answers were: ' + array)
-    };
 
-var correctAnswers = [];
+var arrayOfCountries = ['USA', 'Japan', 'China', 'Italy', 'France', 'Korea', 'Greece', 'Thailand'];
+
+var guesses = 4;
+var country = '';
+while(guesses > 0) {
+    country = prompt('guess a country');
+    guessesLeft--;
+}
+    for (var i = 0; i < arrayOfCountries.length; i++) {
+        // console.log('the current index for the array of countries ' + i)
+        if(arrayOfCountries[i] === countryToFind) {
+            alert('Correct!')
+            return true;
+        // } else {
+            
+        // }
+        alert('The correct answers were ' + arrayOfCountries)
+        return false;
+        }
+};
 //how to sum up correct answers
 
-alert('Enjoy the rest of my website, ' + userName + '.');
+alert('Enjoy the rest of my website, ' + userName + '.')
+
+console.log (arrayOfCountries);
+
+var correctAnswers = [];

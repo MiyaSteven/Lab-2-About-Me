@@ -2,10 +2,16 @@
 
 var userName = prompt('What is your name?')
     alert('Welcome ' + userName + '! Enjoy the first page to my website!');
+// if (userName === '') {
+//     userQuestions();
+// }
 
+function userQuestions() {
+var score = 0;
 var answer1 = confirm('Do you like food?')
     if (answer1 === true) {
         alert('Correct!')
+        score += 1;
         // console.log('great, let us eat!')
         } else {
         alert('Incorrect!')
@@ -16,6 +22,7 @@ var answer2 = confirm('Are you hungry to learn?')
     if (answer2 === true) {
         // console.log ('Let us grow together!')
         alert('Correct!')
+        score += 1;
         } else {    
         alert('Incorrect!')
         // console.log('Good luck to you!')
@@ -24,12 +31,14 @@ var answer2 = confirm('Are you hungry to learn?')
 var answer3 = confirm('Will you try to complete all the labs?')
     if (answer3 === true) {
         alert('Correct!')
+        score += 1;
         // console.log('Great! Keep up the positive momentum!')
         };
 
 var answer4 = confirm('Do you like to reach your goals?')
     if (answer4 === true) {
         alert('Correct!')
+        score += 1;
         // console.log('Awesome you are!')
         } else {        
         alert('Incorrect!')
@@ -39,28 +48,33 @@ var answer4 = confirm('Do you like to reach your goals?')
 var answer5 = confirm('Do you love coding?')
     if (answer5 === true) {
         alert('Correct!')
+        score += 1;
         // console.log('Great, we are ready to begin.')
         } else {
         alert('Incorrect!')
         // console.log('It is okay because we love coding')
         };
 
-var question6 = prompt('Pick a number between 1 and 4. You have 4 guesses!') 
-//how to add numeric input
-var answer6 = 4;
-    for (var i=0; i < 4; i++)
-//how to combine answer6 and i together to give 4 guesses
-        //  console.log(i);
-    if (answer6 === 4) {
-        alert('Correct!')
-        //  console.log('Awesome! Moving forward!')
-    } else { 
-        while (answer6  !== 4)
-        alert('too low')
-        //  console.log(loop until 3 incorrect guesses)
-    };
-//add correct answer after guesses exhausted + show answer
+var question6 = prompt('Pick a number between 1 and 10. You have 4 guesses!') 
+var triesLeft = 4;
+var randomNumber = Math.ceil(Math.random() * (10 - 1) + 1);
 
+while (triesLeft > 0) {
+    var userNum = parseInt(question6, 10)
+        if (userNum === randomNumber) {
+            if (userNum < randomNumber) {
+                question6 = prompt('Too low, ' + triesLeft-- + 'tries remaining!')
+            } else if (userNum > randomNumber) {
+                question6 = prompt('Too high, ' + triesLeft-- + 'tries remaining!')
+            } else if (userNum === randomNumber) {
+                alert('Correct!')
+                score +=1;
+            break;
+            }
+        }
+        console.log('Good job!')
+        triesLeft--;
+    }
 function arrayCountries(countryToFind) {
 var questionSeven = prompt('What countries do you think my favorite foods are from? You have 6 guesses.');
 
@@ -76,18 +90,18 @@ while(guesses > 0) {
         // console.log('the current index for the array of countries ' + i)
         if(arrayOfCountries[i] === countryToFind) {
             alert('Correct!')
+            score += 1;
             return true;
         // } else {
             
         // }
         alert('The correct answers were ' + arrayOfCountries)
         return false;
+        console.log (arrayOfCountries);
         }
+    }
+}
 };
-//how to sum up correct answers
+userQuestions();
 
 alert('Enjoy the rest of my website, ' + userName + '.')
-
-console.log (arrayOfCountries);
-
-var correctAnswers = [];

@@ -1,0 +1,17 @@
+body {
+    background-color: khaki;
+}
+
+#cat {
+    background-color: light blue;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 12pt;
+}
+
+@import url(<link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">)
+font-family: 'Righteous', cursive;
+

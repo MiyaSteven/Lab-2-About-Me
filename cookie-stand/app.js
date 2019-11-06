@@ -59,7 +59,7 @@ function StoreLocation (storeId, minimumHourlyCustomer, maximumHourlyCustomer, a
                 tdElement = document.createElement('td');
                 var avgCookies = this.getAverageCookiesPurchased();
                 sum += avgCookies;
-                this.cookiesPerHour push(avgCookies);
+                this.cookiesPerHour.push(avgCookies);
                 td.textContent = this.cookiesPerHour[cookieIndex];
                 trElement.append(td);
             }
@@ -78,12 +78,13 @@ var dubaiLocation = new StoreLocation('dubai-location', 11, 38, 3.7)
 var parisLocation = new StoreLocation('paris-location', 20, 38, 2.3)
 var limaLocation = new StoreLocation('lima-location', 2, 16, 4.6)
 
+var storeLocations = [seattleLocation, tokyoLocation, dubaiLocation, parisLocation, limaLocation];
+
 
 function calculateHourlyTotal(StoreLocations) {
-    getRandomCustomers(min, max) {
+    getRandomCustomers(min, max) 
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-}
+};
 
 storeLocation.render();
 
@@ -101,6 +102,8 @@ function renderHoursPerDay(tableRef) {
     tdName.textConteent = this.name;
     trElement.append(tdName);
 
+//lecture 9:41AM Make sure you're calling the arrays in the right order.
+
     for(var cookieIndex = 0; cookieIndex < this.cookiesPerHour.length; cookieIndex++) {
         var td = new StoreLocation; 
     }
@@ -114,9 +117,12 @@ renderHoursPerDay(tableRef);
 
 //LOCATIONS
 for(var locationIndex = 0; locationIndex < storeLocations.length; locationIndex++) {
+    var total = 0;
+    for(var cookies = 0; bark < locationIndex) {
     var currentLocation = storeLocations[locationIndex];
 
     currentLocation.render(tableRef);
+    }
 }
 
 function tableFooter () {

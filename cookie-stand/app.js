@@ -16,100 +16,66 @@ function renderHoursPerDay(tableRef) {
         '5:00pm', 
         '6:00pm', 
         '7:00pm',
-        '8:00pm'
+        '8:00pm',
+        'Total'
     ];
 
-    var trElement = document.createElement('tr');
+    var tr = document.createElement('tr');
 
     for(var hours = 0; hours < hoursPerDay.length; hours++) {
-        var thElement = document.createElement('th');
+        var th = document.createElement('th');
 
         th.textContent = hoursPerDay[hours];
 
-        trElement.append(thElement);
+        tr.append(th);
     };
-    tableRef.append(trElement)
-        // var thElement = document.createElement('td');
-        // tdElement.textContent = 'Total Cookies';
-        // trElement.append(tdElement);
-}
-
-function StoreLocation (storeId, minimumHourlyCustomer, maximumHourlyCustomer, averageCookiesPerCustomer) {
-        this.storeId = storeId; 
-        this.cookiesPerHour = [this.minimumHourlyCustomer, this.maximumHourlyCustomer, this.averageCookiesPerCustomer];
-        this.minHourlyCustomer = minimumHourlyCustomer;
-        this.maxHourlyCustomer = maximumHourlyCustomer;
-        this.avgCookiesPerCustomer = averageCookiesPerCustomer;
-
-        this.getRandomCustomersPerHour = function () {
-            return getRandomNumber(this.minimumHourlyCustomer, this.maximumHourlyCustomer);
-        };
-        this.getAverageCookiesPurchased = function () {
-            return Math.round(this.getRandomCustomersPerHour() * this.averageCookiesPerCustomer);
-        };
-        this.render = function (tableRef) {
-            var sum = 0;
-            var trElement = document.createElement('tr');
-
-            var tdElement = document.createElement('td');
-            tdElement.textContent = this.storeId;
-            trElement.append(tdElement);
-
-            for(var cookieIndex = 0; cookieIndex < this.cookiesPerHour.length; cookieIndex++) {
-                tdElement = document.createElement('td');
-                var avgCookies = this.getAverageCookiesPurchased();
-                sum += avgCookies;
-                this.cookiesPerHour push(avgCookies);
-                td.textContent = this.cookiesPerHour[cookieIndex];
-                trElement.append(td);
-            }
-
-            td = document.createElement('td');
-            td.textContent = 'total';
-            trElement.append(td);
-
-            tableRef.append(trElement);
-    } 
+    tableRef.append(tr)
 };
 
-var seattleLocation = new StoreLocation('seattle-location', 23, 65, 6.3);
-var tokyoLocation = new StoreLocation('tokyo-location', 3, 24, 1.2)
-var dubaiLocation = new StoreLocation('dubai-location', 11, 38, 3.7)
-var parisLocation = new StoreLocation('paris-location', 20, 38, 2.3)
-var limaLocation = new StoreLocation('lima-location', 2, 16, 4.6)
+function StoreLocation(storeId, cookiesPerHour, dailyLocationTotal) {
+    this.storeId = storeId;
+    this.cookiesPerHour = cookiesPerHour;
+    this.dailyLocationTotal = dailyLocationTotal;
 
+    this.render = function(tableRef) {
+        var tr = document.createElement('tr');
 
-function calculateHourlyTotal(StoreLocations) {
-    getRandomCustomers(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-}
+        var tdId = document.createElement('td');
+        tdId.textContent = this.storeId;
+        tr.append(tdId);
 
-storeLocation.render();
+        for(var cookieIndex = 0; cookieIndex < this.cookiesPerHour.length; cookieIndex++) {
+            var td = document.createElement('td');
 
-//find reference in the DOM
-//create elements we need to append to the DOM
-//set their contents
-//add your elements to your DOM reference
-//aka add your elements to the DOM
+            td.textContent = this.cookiesPerHour[cookieIndex];
+            tr.append(td);
+        }
 
+        td = document.createElement('td');
 
-function renderHoursPerDay(tableRef) {
-    var trElement = document.createElement('tr');
+        td.textContent = 'total'
+        tr.append(td);
 
-    var tdName = document.createElement('td');
-    tdName.textConteent = this.name;
-    trElement.append(tdName);
-
-    for(var cookieIndex = 0; cookieIndex < this.cookiesPerHour.length; cookieIndex++) {
-        var td = new StoreLocation; 
+        tableRef.append(tr);
     }
-    tableRef.append(trElement);
-}
+};
 
-var tableRef = document.getElementById('cookies-data');
+var seattleLocation = new StoreLocation('seattle-location', [23, 65, 6.3], 'Totals');
+var tokyoLocation = new StoreLocation('tokyo-location', [3, 24, 1.2], 'Totals');
+var dubaiLocation = new StoreLocation('dubai-location', [11, 38, 3.7], 'Totals');
+var parisLocation = new StoreLocation('paris-location', [20, 38, 2.3], 'Totals');
+var limaLocation = new StoreLocation('lima-location', [2, 16, 4.6], 'Totals');
 
-//HOURS
+var storeLocations = [seattleLocation, tokyoLocation, dubaiLocation, parisLocation, limaLocation];
+
+function calculateHourlyTotal(storeLocations) {
+    getRandomCustomers(minimumCustomerPerHour, maximumCustomerPerHour) 
+        return Math.floor(Math.random() * (maximumCustomerPerHour - minimumCustomerPerHour + 1)) + minimumCustomerPerHour;
+};
+
+var tableRef = document.getElementById('cookie-data');
+
+//STORE HOURS
 renderHoursPerDay(tableRef);
 
 //LOCATIONS
@@ -117,11 +83,8 @@ for(var locationIndex = 0; locationIndex < storeLocations.length; locationIndex+
     var currentLocation = storeLocations[locationIndex];
 
     currentLocation.render(tableRef);
-}
+};
 
-function tableFooter () {
-    var trElement = document.createElement('tr');
-    var tdElement = document.createElement('td');
-    tdElement.textContent = 'Totals';
-    trElement.append(tdElement);
-}
+StoreLocation.render(tableRef);
+
+calculateHourlyTotal.render(tableRef);

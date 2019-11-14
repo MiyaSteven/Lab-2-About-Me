@@ -45,13 +45,6 @@
 //     // console.log('It is okay because we love coding')
 // };
 
-
-
-
-
-
-
-
 function numberTest() {
     var question6 = prompt('Pick a number between 1 and 4. You have 4 guesses!')
 

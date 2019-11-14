@@ -1,9 +1,30 @@
 'use strict'
 
-function StoreLocation (storeId, cookiesPerHour, totalCookiesPerLocation) {
+let hoursPlaceholder = [
+    '6:00am', 
+    '7:00am', 
+    '8:00am', 
+    '9:00am', 
+    '10:00am', 
+    '11:00am', 
+    '12:00pm', 
+    '1:00pm', 
+    '2:00pm', 
+    '3:00pm', 
+    '4:00pm', 
+    '5:00pm', 
+    '6:00pm', 
+    '7:00pm',
+    '8:00pm'
+]
+
+function StoreLocation (storeId, min, max, cookiesPerHour) {
     this.storeId = storeId; 
     this.cookiesPerHour = cookiesPerHour;
-    this.totalCookiesPerLocation = totalCookiesPerLocation;
+    this.min = min;
+    this.max = max;
+
+    this.cookiesSoldPerHour = [];
 
     this.render = function (domReference) {
 
@@ -24,7 +45,20 @@ function StoreLocation (storeId, cookiesPerHour, totalCookiesPerLocation) {
         tr.append(td);
 
         domReference.append(tr);
-    } 
+    }
+    
+    this.calculateHourlyTotalCookies = function(){
+
+        this.cookiesSoldPerHour = [];
+
+        for (var i = 0; i < hoursPlaceholder.length; i++){
+            let x = this.cookiesPerHour * getRandomCustomers(this.min, this.max);
+
+            this.cookiesSoldPerHour.push(x);
+        }
+
+    }
+
 }
 
 var addNewLocation = document.getElementById('click-me');
@@ -37,9 +71,6 @@ table.innerHTML = '';
 });
 
 function renderHoursPerDay(tableRef) {
-
-
-
 
     var hoursPerDay = [
         '6:00am', 
@@ -82,11 +113,11 @@ function renderHoursPerDay(tableRef) {
 
 }
 
-var seattleLocation = new StoreLocation('seattle-location', [23, 65, 6.3], 'Daily Total Cookies');
-var tokyoLocation = new StoreLocation('tokyo-location', [3, 24, 1.2], 'Daily Total Cookies');
-var dubaiLocation = new StoreLocation('dubai-location', [11, 38, 3.7], 'Daily Total Cookies');
-var parisLocation = new StoreLocation('paris-location', [20, 38, 2.3], 'Daily Total Cookies');
-var limaLocation = new StoreLocation('lima-location', [2, 16, 4.6], 'Daily Total Cookies');
+var seattleLocation = new StoreLocation('seattle-location', 23, 65, 6.3);
+var tokyoLocation = new StoreLocation('tokyo-location', 3, 24, 1.2);
+var dubaiLocation = new StoreLocation('dubai-location', 11, 38, 3.7);
+var parisLocation = new StoreLocation('paris-location', 20, 38, 2.3);
+var limaLocation = new StoreLocation('lima-location', 2, 16, 4.6);
 
 var storeLocations = [seattleLocation, tokyoLocation, dubaiLocation, parisLocation, limaLocation];
 
@@ -97,10 +128,25 @@ var storeLocations = [seattleLocation, tokyoLocation, dubaiLocation, parisLocati
 var tableRef = document.getElementById('cookies-data');
 
 renderHoursPerDay(tableRef);
-// function calculateHourlyTotal(StoreLocations) {
-//     getRandomCustomers(min, max) 
-//         return Math.floor(Math.random() * (max - min + 1)) + min;
-// };
+
+function calculateHourlyTotal(StoreLocations) {
+
+    for(var i = 0; i < StoreLocations.length; i++){
+
+        StoreLocations[i].calculateHourlyTotalCookies()
+
+    }
+
+    getRandomCustomers();
+};
+
+calculateHourlyTotal(storeLocations);
+
+function getRandomCustomers(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+} 
+
+
 
 // storeLocation.render();
 

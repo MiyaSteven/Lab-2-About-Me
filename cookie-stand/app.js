@@ -55,7 +55,7 @@ function StoreLocation (storeId, min, max, cookiesPerHour) {
         this.cookiesSoldPerHour = [];
 
         for (var i = 0; i < hoursPlaceholder.length; i++){
-            let x = Math.ceil( this.cookiesPerHour * getRandomCustomers(this.min, this.max) );
+            let x = Math.ceil(this.cookiesPerHour * getRandomCustomers(this.min, this.max));
 
             sum = sum + x;
 
@@ -162,7 +162,6 @@ function renderStoreLocationData(stores){
     for(var i = 0; i < stores.length; i++){
 
         stores[i].render(tableRef);
-
     }
 
 }
@@ -180,6 +179,23 @@ function renderWebsite(){
 
     //Render all stores
     renderStoreLocationData(storeLocations);
+}
+
+
+
+//Generate cookies sold per HOUR for ALL stores array
+var potato = function() {
+    for(let i = 0; i < hoursPerDay.length; i++) {
+        return Math.ceil(getRandomCustomers * calculateHourlyTotal)
+    }
+}
+
+//Generate cookies sold per DAY for ALL stores
+var 
+
+//Render your footer with existing cookies sold per hour array
+var spaghett = function(){
+    
 }
 
 
